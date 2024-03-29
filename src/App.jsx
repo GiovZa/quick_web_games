@@ -9,6 +9,8 @@ import Routing from './Routing';
 import axios from 'axios';
 import Header from './components/Header/header.jsx';
 import Carouselpage from './components/carousel/carousel';
+import MineSweeper from './components/Games/MineSweeper.jsx';
+
 // import Search from 'components/Search';
 // import Details from 'components/DetailsView/Details';
 // import GridContainer from 'components/GridView/GridContainer';
@@ -26,6 +28,7 @@ function App(props) {
   return (
     <div className="App">
       <Routing />
+      <MineSweeper/>
     </div>
   );
 }
