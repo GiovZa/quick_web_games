@@ -8,13 +8,14 @@ import { getDatabase } from "firebase/database";
 
 // Web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCWg_RpUdpGlmOTuz5NQds-BNTFy0bkXcM",
-  authDomain: "qwgdatabase.firebaseapp.com",
-  projectId: "qwgdatabase",
-  storageBucket: "qwgdatabase.appspot.com",
-  messagingSenderId: "789779546871",
-  appId: "1:789779546871:web:232e2caa274bff61a149f2",
-  measurementId: "G-99XPP3RDFX"
+  apiKey: "AIzaSyCW1q3sn2nJRazqWGYarJF8nKMlpqqui6Y",
+  authDomain: "qwgdatabases.firebaseapp.com",
+  databaseURL: "https://qwgdatabases-default-rtdb.firebaseio.com",
+  projectId: "qwgdatabases",
+  storageBucket: "qwgdatabases.appspot.com",
+  messagingSenderId: "641291972981",
+  appId: "1:641291972981:web:b633322f4711a7f12a233c",
+  measurementId: "G-KJSXVRL3D0"
 };
 
 // Initialize Firebase
