@@ -28,7 +28,6 @@ function App(props) {
   return (
     <div className="App">
       <Routing />
-      <MineSweeper/>
     </div>
   );
 }

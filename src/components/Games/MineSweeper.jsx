@@ -203,7 +203,7 @@ const MineSweeper = () => {
 };
 
   return (
-    <div>
+    <div className="MineSweeper-setting">
       <div className="game-info">
         <span>Clicks: {clicks}</span>
         <span>Bombs Remaining: {num_of_bombs - flags + 1}</span>
