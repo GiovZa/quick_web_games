@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./UltimateTicTacToe.css";
+import "./UltimateTicTacToe.scss";
 
 export default function UltimateTicTacToe() {
   const [turn, setTurn] = useState("X");
@@ -10,10 +10,7 @@ export default function UltimateTicTacToe() {
   const [numOfWins_O, setNumOfWins_O] = useState(0);
   const [numOfDraws, setNumOfDraws] = useState(0);
   const [availableArea, setAvailableArea] = useState([0,1,2,3,4,5,6,7,8]);
-  const [nextArea, setNextArea] = useState(Math.floor(Math.random()*9));
-
-
-
+  const [nextArea, setNextArea] = useState(4);
 
   const checkwinner = (arr, num) => {
     /*check three kinds of winning in tic tac toe*/
@@ -162,7 +159,12 @@ export default function UltimateTicTacToe() {
         }
       }
 
-      setNextArea(area_copy[Math.floor(Math.random() * area_copy.length)]);
+      if (area_copy.includes(num % 9)) {
+        setNextArea(num % 9)
+      }
+      else {
+        setNextArea(area_copy[Math.floor(Math.random() * area_copy.length)]);
+      }
   };
 
 
@@ -207,7 +209,7 @@ export default function UltimateTicTacToe() {
     setNumOfWins_O(0);
     setNumOfDraws(0);
     setAvailableArea([0,1,2,3,4,5,6,7,8]);
-    setNextArea(Math.floor(Math.random()*9));
+    setNextArea(4);
   };
 
   return (

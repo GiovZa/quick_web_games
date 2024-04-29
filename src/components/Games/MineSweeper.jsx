@@ -133,6 +133,7 @@ const MineSweeper = () => {
       saveGameStats(seconds, false, clicks, num_of_bombs - flags);
       setTimeout(() => alert('Game Over!'), 0);
     } else {
+      // Check to see if clciked cell reveals a large portion of map
       if (newBoard[row][col].adjacentBombs === 0) {
         revealAdjacentCells(newBoard, row, col);
       }
@@ -143,6 +144,7 @@ const MineSweeper = () => {
     setClicks(clicks + 1);
   };
 
+  // Place flag for bomb
   const handleRightClick = (event, row, col) => {
     event.preventDefault();
     if (!alive || board[row][col].clicked) return;
@@ -155,6 +157,7 @@ const MineSweeper = () => {
     setFlags(newBoard[row][col].flagged ? flags + 1 : flags - 1);
   };
 
+  // Reveal neighbor cells when clicked cell is surrounded by safe squares
   const revealAdjacentCells = (board, row, col) => {
     for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
@@ -168,6 +171,7 @@ const MineSweeper = () => {
     }
   };
 
+  // Reveal cell's content when clicked or when game has ended
   const renderCell = (cell, row, col) => {
     let cellContent = "";
     const cellStyle = {};
@@ -203,22 +207,24 @@ const MineSweeper = () => {
 };
 
   return (
-    <div className="MineSweeper-setting">
-      <div className="game-info">
-        <span>Clicks: {clicks}</span>
-        <span>Bombs Remaining: {num_of_bombs - flags + 1}</span>
-        <span>Seconds: {seconds}</span>
+    <div className='MineSweeper'>
+      <div className="MineSweeper-setting">
+        <div className="game-info">
+          <span>Clicks: {clicks}</span>
+          <span>Bombs Remaining: {num_of_bombs - flags + 1}</span>
+          <span>Seconds: {seconds}</span>
+        </div>
+        <button onClick={restartGame} className="restart-button">Restart Game</button> {}
+        <table className="minesweeper-board">
+          <tbody>
+            {board.map((row, rowIndex) => (
+              <tr key={`row-${rowIndex}`}>
+                {row.map((cell, cellIndex) => renderCell(cell, rowIndex, cellIndex))}
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </div>
-      <button onClick={restartGame} className="restart-button">Restart Game</button> {}
-      <table className="minesweeper-board">
-        <tbody>
-          {board.map((row, rowIndex) => (
-            <tr key={`row-${rowIndex}`}>
-              {row.map((cell, cellIndex) => renderCell(cell, rowIndex, cellIndex))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
     </div>
   );
   
