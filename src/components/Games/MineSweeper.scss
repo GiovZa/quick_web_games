@@ -1,4 +1,4 @@
-body {
+.MineSweeper-setting {
   background-color: rgb(98, 98, 98);
   height: 100vh;
   display: flex;
@@ -7,9 +7,6 @@ body {
   align-items: center; 
 }
 
-h2, h3 {
-  color: whitesmoke;
-}
 
 .game-info {
   display: flex;

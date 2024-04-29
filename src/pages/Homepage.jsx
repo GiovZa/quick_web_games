@@ -9,6 +9,12 @@ export default function Homepage() {
             <Header />
             <Search/>
             <Carouselpage />
+            <div>
+            	<a href='/UltimateTicTacToe'>Ultimate Tic-Tac-Toe</a>
+            </div>
+            <div>
+            	<a href='/MineSweeper'>MineSweeper</a>
+            </div>
             
       </div>
     );
