@@ -20,6 +20,11 @@ Clicking the "start now" button will lead users to our Home Page.
 <br />
 We design our home page with components Header, Search Bar, Carousel and Game Navigation.
 
+![image](https://github.com/CS222-UIUC-SP24/group-project-team-95/assets/128328586/ae3561ed-38ed-4cb1-8a6e-d1318096858a)
+
+
+
+
 ## MineSweeper
 
 ## Ultimate Tic Tac Toe
