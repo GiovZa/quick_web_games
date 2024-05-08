@@ -1,74 +1,95 @@
-.MineSweeper-setting {
-  background-color: rgb(98, 98, 98);
-  height: 100vh;
-  display: flex;
-  flex-direction: column; 
-  justify-content: center; 
-  align-items: center; 
+.MineSweeper {
+  --clr-neon: rgb(255, 226, 4); 
+  --clr-bg: #070101; 
+  --clr-border: rgb(237, 237, 151);  
+
+  .MineSweeper-setting {
+    background-color: var(--clr-bg);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .game-info {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color: rgba(98, 98, 98, 0.8);
+    border: 2px solid var(--clr-border);
+    border-radius: 5px;
+    color: var(--clr-neon);
+    text-shadow: 
+      0 0 7px #fff,
+      0 0 31px var(--clr-neon);
+  }
+
+  .game-info > span {
+    margin: 0 10px;
+    font-weight: bold;
+  }
+
+  .minesweeper-board {
+    border-collapse: collapse;
+    font-size: 150%;
+    font-family: 'Courier New', monospace;
+    font-weight: bold;
+  }
+
+  .minesweeper-board td {
+    background-color: rgb(30, 30, 30);
+    width: 50px;  
+    height: 50px; 
+    border: 2px solid var(--clr-border);
+    text-align: center;
+    vertical-align: middle;
+    cursor: pointer;
+    color: var(--clr-neon);
+    font-size: 24px;
+    line-height: 40px;
+    text-shadow: none;
+    overflow: hidden;
 }
 
+  .cell.unknown {
+    background-color: #444; 
+  }
 
-.game-info {
-  display: flex;
-  justify-content: space-around; 
-  align-items: center; 
-  padding: 10px;
-  background-color: lightgrey;
-  border-radius: 5px;
+ .cell.flagged, .cell.clicked {
+    font-size: 24px;
+    text-shadow: none
 }
 
-.game-info > span {
-  margin: 0 10px;
-}
+  button {
+    font-family: 'Courier New', monospace;
+    height: 30px;
+    background-color: var(--clr-neon);
+    color: var(--clr-bg);
+    font-weight: bolder;
+    border-radius: 20px;
+    margin: 10px;
+    border: none;
+    box-shadow: 
+      0 0 10px #fff,
+      0 0 20px var(--clr-neon);
+    transition: background-color 0.3s ease-in-out;
+    &:hover {
+      background-color: rgb(255, 236, 34);
+    }
+  }
 
-
-#box {
-  text-align: center;
-}
-
-.minesweeper-board {
-  border-collapse: collapse;
-  font-size: 150%;
-  font-family: sans-serif;
-  font-weight: bold;
-}
-
-.minesweeper-board td {
-  background-color: rgb(195, 195, 195);
-  width: 40px;
-  height: 40px;
-  border: 1px solid black;
-  text-align: center;
-  vertical-align: middle;
-  cursor: pointer;
-}
-
-.cell.clicked {
-  background-color: #e0e0e0; 
-}
-
-.cell.unknown {
-  background-color: #cccccc; 
-}
-
-button {
-  height: 30px;
-  background-color: rgb(195, 195, 195);
-  color: black;
-  font-weight: bolder;
-  border-radius: 20px;
-  margin: 10px;
-}
-
-.restart-button {
-  padding: 10px 20px;
-  margin-top: 20px;
-  font-size: 16px;
-  cursor: pointer;
-  background-color: #f0f0f0;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  &:hover {
-    background-color: #e9e9e9;
+  .restart-button {
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: var(--clr-neon);
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    &:hover {
+      background-color: rgb(255, 236, 34);
+    }
   }
 }
