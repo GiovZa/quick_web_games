@@ -18,7 +18,7 @@ const Search = ({ searchTerm, onSearchTermChange, onSortChange, onTypeFilter }) 
 
     // THESE BUTTON FILTERS WILL PROBABLY BE OPTIONAL BECAUSE OF THE FEW GAMES WE HAVE
     // function called when a game-type filter button is click. The function will filter the display items by the selected type.
-    onGameTypeFilter: PropTypes.func.isRequired,
+    onTypeFilter: PropTypes.func.isRequired,
   };
 
   return (
@@ -26,24 +26,22 @@ const Search = ({ searchTerm, onSearchTermChange, onSortChange, onTypeFilter }) 
       <input
         className="Search-input"
         type="text"
-        placeholder="Games..."
+        placeholder="Search Games ..."
         value={searchTerm}
         onChange={(e) => onSearchTermChange(e.target.value)}
       />
       <div className="Search-controls">
         <select onChange={(e) => onSortChange(e.target.value)}>
-          <option value="numerical">Lowest Number to Highest</option>
-          <option value="reverseNumerical">Highest Number to Lowest</option>
           <option value="alphabetical">A-Z</option>
           <option value="reverseAlphabetical">Z-A</option>
         </select>
-        <button class = "All" onClick={() => onTypeFilter('')}>All Types </button>
-        <button class = "Puzzle" onClick={() => onTypeFilter('puzzle')}>Puzzle</button>
-        <button class = "Classics" onClick={() => onTypeFilter('classic')}>Classics</button>
-        <button class = "AI" onClick={() => onTypeFilter('AI')}>AI</button>
-    
-        
-        {/* Add more type buttons as needed */}
+        <button  onClick={() => onTypeFilter('')}>All Types </button>
+        <button  onClick={() => onTypeFilter('Classic')}>Classic</button>
+        <button  onClick={() => onTypeFilter('Puzzle')}>Puzzle</button>
+        <button  onClick={() => onTypeFilter('Strategy')}>Strategy</button>
+        <button  onClick={() => onTypeFilter('Single Player')}>Single Player</button>
+        <button  onClick={() => onTypeFilter('Two Player')}>Two Player</button>
+        <button  onClick={() => onTypeFilter('Board')}>Board</button>
       </div>
     </div>
   );

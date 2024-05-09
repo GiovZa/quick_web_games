@@ -1,0 +1,28 @@
+.button-style {
+    font-family: 'Arial', sans-serif;
+    padding: 10px 10px; /* Adjust padding to suit your design */
+    padding-bottom: 10px;
+    background-color: #007bff; /* Primary blue, common in Bootstrap */
+    color: white; /* Text color */
+    text-decoration: none; /* Removes underline */
+    border-radius: 5px; /* Rounded corners */
+    display: inline-block; /* Necessary for padding and margins to work on anchor */
+    text-align: center; /* Center text inside the button */
+    border: none; /* No border unless you want one */
+    transition: background-color 0.3s, box-shadow 0.3s; /* Smooth transition for visual effects */
+    font-size: 16px; /* Set font size as needed */
+    cursor: pointer; /* Changes cursor to indicate it's clickable */
+  
+    /* Interaction styles */
+    &:hover, &:focus {
+      background-color: #0056b3; /* Darker blue for hover/focus */
+      box-shadow: 0 2px 4px rgba(0,0,0,0.2); /* Shadow for 3D effect */
+      outline: none; /* Removes the focus outline */
+    }
+  
+    &:active {
+      background-color: #004085; /* Even darker blue for active state */
+      box-shadow: inset 0 2px 4px rgba(0,0,0,0.3); /* Inner shadow for pressed effect */
+    }
+  }
+  

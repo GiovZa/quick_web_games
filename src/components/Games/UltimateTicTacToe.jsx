@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./UltimateTicTacToe.scss";
+import Header from "../../components/Header/header";
 
 export default function UltimateTicTacToe() {
   const [turn, setTurn] = useState("X");
@@ -213,6 +214,8 @@ export default function UltimateTicTacToe() {
   };
 
   return (
+    <div className="App">
+      <Header/>
     <div className="container">
       <h1>Ultimate Tic Tac Toe</h1>
       <h3>Walk in the 
@@ -366,6 +369,7 @@ export default function UltimateTicTacToe() {
       <button className="reset-button" onClick={handleReset}>
         Reset
       </button>
+    </div>
     </div>
   );
 }
