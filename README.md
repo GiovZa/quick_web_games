@@ -39,6 +39,7 @@ Each game element in the grid container is a link to their respective game.
 
 - **React Hooks**: Utilize `useState` to manage filtering through search bar, drop-dwon filter, and buttons
 - **Component Composition**: Interlocked functionality between Search/filter components, Grid container, and the grid elements themselves.
+- **Routing**: All clickable components route to the correct respective page routes.
 
 
 ## Hangman
