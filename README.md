@@ -35,11 +35,21 @@ Each game element in the grid container is a link to their respective game.
 
 ![image](public/Searchpage.png)
 
-## Hangman
+### Implementation Details:
 
+- **React Hooks**: Utilize `useState` to manage filtering through search bar, drop-dwon filter, and buttons
+- **Component Composition**: Interlocked functionality between Search/filter components, Grid container, and the grid elements themselves.
+
+
+## Hangman
 
 ![image](public/Hangman.png)
 
+### Implementation Details:
+
+- **React Hooks**: Utilize `useState` and `useEffect` to manage state of the game, such as number of guesses, disabling the key upon guessing, drawing the body, etc.
+- **Event Handling**: Includes handling of keyboard clicks on the screen or physical keyboard presses. The user can restart by pressing the 'enter' button.
+- **Component Composition**: Interlocked functionality between the Hangman drawing component, the keyboard, and the hidden word to be guessed.
 
 ## MineSweeper
 
