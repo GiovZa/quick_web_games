@@ -14,6 +14,9 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 <br />
 We focuses on the front-end development and provide quick and convenient access for users to play Hangman, Minesweeper and Ultimate Tic Tac Toe.
 
+## Technical Architecture Diagram
+![image](public/TechnicalArchitectureDiagram.png)
+
 ## Front-end Design
 
 Users will first enter the welcome page shown below:
