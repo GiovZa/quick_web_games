@@ -5,6 +5,8 @@ import { db } from '../../firebase/firebase-config';
 import AuthModal from './AuthModal';
 import LogoutModal from './LogoutModal';  // Import LogoutModal
 import './MineSweeper.scss';
+import Header from "../../components/Header/header";
+
 
 const MineSweeper = () => {
   const num_of_rows = 12;
@@ -224,6 +226,8 @@ const MineSweeper = () => {
   };
 
   return (
+    <div className="App">
+      <Header/>
     <div className='MineSweeper'>
       <div className="MineSweeper-setting">
         <div className="game-info">
@@ -244,6 +248,7 @@ const MineSweeper = () => {
       </div>
       {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
       {showLogoutModal && <LogoutModal onClose={() => setShowLogoutModal(false)} />}
+    </div>
     </div>
   );
 };

@@ -11,30 +11,47 @@
       font-size: 24px;
       text-transform: uppercase;
       letter-spacing: 2px;
-    }
-  
-    nav {
+      color: #ffffff; // Define a text color for h1
+      
       button {
-        background-color: #2996cc; /* Orange button color */
-        border: none;
-        color: #fff; /* White button text color */
-        padding: 10px 20px;
-        margin-left: 10px;
-        cursor: pointer;
-        font-family: 'Arial', sans-serif;
-        font-size: 16px;
-        text-transform: uppercase;
-        text-decoration: none; /* Remove default underline style */
-        color: inherit; /* Use the parent element's color for the link text */
-        outline: none; /* Remove focus outline for accessibility */
-        letter-spacing: 1px;
-        text-decoration: none;
-        outline: none;
-  
-        &:hover {
-          background-color: #ff7043; /* Darker orange color on hover */
+        background: transparent;
+        border: none; // Removes the border
+        color: inherit; // Inherits text color from h1
+        
+        a { // Targeting the <Link> as if it's an <a> tag
+          font-family: 'Arial', sans-serif;
+          font-size: 24px;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          color: #ffffff; // Ensures the link inherits the text color
+          text-decoration: none;
         }
       }
     }
+
+    .button-style {
+      font-family: 'Arial', sans-serif;
+      font-size: 16px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #ffffff; // Ensures the link inherits the text color
+      text-decoration: none;
+      margin-left: 30px;
+
+      padding: 10px 20px;
+      background-color: #007BFF;
+      border: none;
+      border-radius: 5px;
+      text-align: center;
+      display: inline-block;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    
+      /* Hover state */
+      &:hover {
+        background-color: #0056b3;
+      }
+    }
+    
   }
   
