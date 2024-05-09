@@ -1,6 +1,10 @@
 # Quick Web Games 
 
-contributors: Brian Ngeunjuntr (bngeu2), Gio Zavalza (gzava3), Kathryn Chappel (chappel4), Linda Yan (linday2)
+Contributors: 
+Brian Ngeunjuntr (bngeu2): Frontend Design, Home Page, Search Page with filtering functionality, Hangman
+Gio Zavalza (gzava3): Backend Design, Firebase integration, Login Authorization, Minesweeper
+Kathryn Chappel (chappel4): 
+Linda Yan (linday2): Frontend Design
 
 ## To deploy the game:
 download the folder, open it in editor, and run "npm install", "npm start" in the terminal
@@ -8,7 +12,7 @@ download the folder, open it in editor, and run "npm install", "npm start" in th
 ## Introduction
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 <br />
-We focuses on the front-end development and provide quick and convenient access for users to play MineSweeper and Ultimate Tic Tac Toe.
+We focuses on the front-end development and provide quick and convenient access for users to play Hangman, Minesweeper and Ultimate Tic Tac Toe.
 
 ## Front-end Design
 
