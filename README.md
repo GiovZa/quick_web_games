@@ -3,8 +3,8 @@
 Contributors: 
 - Brian Ngeunjuntr (bngeu2): Frontend Design, Home Page, Search Page with filtering functionality, Hangman
 - Gio Zavalza (gzava3): Backend Design, Firebase integration, Login Authorization, Minesweeper
-- Kathryn Chappel (chappel4): 
-- Linda Yan (linday2): Frontend Design
+- Kathryn Chappel (chappel4): Frontend Design, Ultimate Tic Tac Toe
+- Linda Yan (linday2): Frontend Design, Welcome page and carousel, Ultimate Tic Tac Toe
 
 ## To deploy the game:
 download the folder, open it in editor, and run "npm install", "npm start" in the terminal
