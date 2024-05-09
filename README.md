@@ -1,10 +1,10 @@
 # Quick Web Games 
 
 Contributors: 
-Brian Ngeunjuntr (bngeu2): Frontend Design, Home Page, Search Page with filtering functionality, Hangman
-Gio Zavalza (gzava3): Backend Design, Firebase integration, Login Authorization, Minesweeper
-Kathryn Chappel (chappel4): 
-Linda Yan (linday2): Frontend Design
+- Brian Ngeunjuntr (bngeu2): Frontend Design, Home Page, Search Page with filtering functionality, Hangman
+- Gio Zavalza (gzava3): Backend Design, Firebase integration, Login Authorization, Minesweeper
+- Kathryn Chappel (chappel4): 
+- Linda Yan (linday2): Frontend Design
 
 ## To deploy the game:
 download the folder, open it in editor, and run "npm install", "npm start" in the terminal
@@ -16,17 +16,29 @@ We focuses on the front-end development and provide quick and convenient access 
 
 ## Front-end Design
 
-users will first enter the welcome page shown below:
-![image](public/Homepage.png)
+Users will first enter the welcome page shown below:
+![image](public/Welcomepage.png)
 
 <br />
 Clicking the "start now" button will lead users to our Home Page.
 <br />
-We design our home page with components Header, Search Bar, Carousel and Game Navigation.
+We design our home page with components Header and a Carousel with game navigation.
 
-![image](https://github.com/CS222-UIUC-SP24/group-project-team-95/assets/128328586/ae3561ed-38ed-4cb1-8a6e-d1318096858a)
+![image](public/Homepage.png)
+
+## Search Page
+We designed our search page with the Header, Search bar, and filtering components.
+
+The Search, filter dropdown bar, and buttons can be used to filter the grid container that contains the games.
+
+Each game element in the grid container is a link to their respective game.
+
+![image](public/Searchpage.png)
+
+## Hangman
 
 
+![image](public/Hangman.png)
 
 
 ## MineSweeper
