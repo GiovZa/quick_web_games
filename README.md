@@ -17,7 +17,7 @@ We focuses on the front-end development and provide quick and convenient access 
 ## Front-end Design
 
 users will first enter the welcome page shown below:
-![image](https://github.com/CS222-UIUC-SP24/group-project-team-95/assets/128328586/fa2c567e-fcf0-4f30-84f2-c2079688c4e3)
+![image](public/Homepage.png)
 
 <br />
 Clicking the "start now" button will lead users to our Home Page.
