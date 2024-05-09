@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { ref, set } from "firebase/database";
-import { database } from '../../firebase/firebase-config';
+import { doc, setDoc, collection } from "firebase/firestore"; 
+import { getAuth, signOut } from "firebase/auth";
+import { db } from '../../firebase/firebase-config';
+import AuthModal from './AuthModal';
+import LogoutModal from './LogoutModal';  // Import LogoutModal
 import './MineSweeper.scss';
 
 const MineSweeper = () => {
@@ -13,6 +16,10 @@ const MineSweeper = () => {
   const [flags, setFlags] = useState(0);
   const [clicks, setClicks] = useState(0);
   const [seconds, setSeconds] = useState(0);
+
+  const [showAuthModal, setShowAuthModal] = useState(false);
+  const [showLogoutModal, setShowLogoutModal] = useState(false);  // State for the logout modal
+
   const colors = {1: 'blue', 2: 'green', 3: 'red', 4: 'purple', 5: 'maroon', 6: 'turquoise', 7: 'black', 8: 'grey'};
 
   const restartGame = () => {
@@ -46,16 +53,15 @@ const MineSweeper = () => {
         return cell;
       });
     });
-  
     setBoard(updatedBoard);
-  };  
+  };
 
   const initializeBoard = () => {
     return Array.from({ length: num_of_rows }, () =>
       Array.from({ length: num_of_cols }, () => ({
         hasBomb: false, clicked: false, flagged: false, markedIncorrectly: false, adjacentBombs: 0
       })));
-  };  
+  };
 
   const placeBombs = (initialRow, initialCol) => {
     let tempBoard = [...board];
@@ -89,7 +95,7 @@ const MineSweeper = () => {
         if (cell.clicked || cell.hasBomb) clickedCellsCount++;
       });
     });
-  
+
     if (clickedCellsCount === num_of_rows * num_of_cols) {
       setAlive(false);
       saveGameStats(seconds, true, clicks, num_of_bombs - flags);
@@ -97,67 +103,81 @@ const MineSweeper = () => {
     }
   };
 
-  const saveGameStats = (timeSpent, gameWon, clicksMade, bombsLeft) => {
-    const gameStatsRef = ref(database, 'gameStats/' + Date.now());
-  
-    const gameData = {
-      time: timeSpent,
-      won: gameWon,
-      clicks: clicksMade,
-      bombsRemaining: bombsLeft,
-      timestamp: Date.now(), 
-    };
-  
-    set(gameStatsRef, gameData).then(() => {
-      console.log('Game stats saved successfully!');
-    }).catch((error) => {
-      console.error('Failed to save game stats', error);
-    });
+  const formatDate = () => {
+    const now = new Date();
+    const month = ('0' + (now.getMonth() + 1)).slice(-2); // getMonth() is zero-indexed
+    const day = ('0' + now.getDate()).slice(-2);
+    const year = now.getFullYear();
+    const hours = ('0' + now.getHours()).slice(-2);
+    const minutes = ('0' + now.getMinutes()).slice(-2);
+    const seconds = ('0' + now.getSeconds()).slice(-2);
+    return `${month}-${day}-${year}-${hours}-${minutes}-${seconds}`;
+  };
+
+  const saveGameStats = async (timeSpent, gameWon, clicksMade, bombsLeft) => {
+    const auth = getAuth();
+    const user = auth.currentUser;
+    if (user) {
+      // User is signed in, show the LogoutModal instead of AuthModal
+      setShowLogoutModal(true);
+      const emailSanitized = user.email.replace(/[\.\@\,\/\#\\\$\[\]]/g, '_');
+      const userRef = doc(db, `minesweeperStats`, emailSanitized);
+      const gamesCollectionRef = collection(userRef, 'games');
+      const formattedDate = formatDate();
+      const gameStatsRef = doc(gamesCollectionRef, formattedDate);
+      const gameData = {
+          time: timeSpent,
+          won: gameWon,
+          clicks: clicksMade,
+          bombsRemaining: bombsLeft,
+          timestamp: Date.now(),
+      };
+      try {
+          await setDoc(gameStatsRef, gameData);
+          console.log('Game stats saved successfully!');
+      } catch (error) {
+          console.error('Failed to save game stats', error);
+      }
+    } else {
+      // No user is signed in, show the AuthModal
+      setShowAuthModal(true);
+    }
   };
 
   const handleCellClick = (row, col) => {
     if (!alive || board[row][col].clicked || board[row][col].flagged) return;
-  
     if (firstClick) {
       const tempBoard = placeBombs(row, col);
       setBoard(tempBoard);
       setFirstClick(false);
     }
-  
     let newBoard = [...board];
     newBoard[row][col].clicked = true;
-
     if (newBoard[row][col].hasBomb) {
       setAlive(false);
       revealBombsAndIncorrectFlags();
       saveGameStats(seconds, false, clicks, num_of_bombs - flags);
       setTimeout(() => alert('Game Over!'), 0);
     } else {
-      // Check to see if clciked cell reveals a large portion of map
       if (newBoard[row][col].adjacentBombs === 0) {
         revealAdjacentCells(newBoard, row, col);
       }
       checkWin(newBoard);
     }
-  
     setBoard(newBoard);
     setClicks(clicks + 1);
   };
 
-  // Place flag for bomb
   const handleRightClick = (event, row, col) => {
     event.preventDefault();
     if (!alive || board[row][col].clicked) return;
-
     const newBoard = [...board];
     newBoard[row][col].flagged = !newBoard[row][col].flagged;
-
     setBoard(newBoard);
     setClicks((prevClicks) => prevClicks + 1);
     setFlags(newBoard[row][col].flagged ? flags + 1 : flags - 1);
   };
 
-  // Reveal neighbor cells when clicked cell is surrounded by safe squares
   const revealAdjacentCells = (board, row, col) => {
     for (let i = -1; i <= 1; i++) {
       for (let j = -1; j <= 1; j++) {
@@ -171,47 +191,44 @@ const MineSweeper = () => {
     }
   };
 
-  // Reveal cell's content when clicked or when game has ended
   const renderCell = (cell, row, col) => {
     let cellContent = "";
     const cellStyle = {};
 
     if (cell.clicked) {
-        if (cell.hasBomb) {
-            cellContent = "💣";
-        } else if (cell.adjacentBombs > 0) {
-            cellContent = cell.adjacentBombs;
-            cellStyle.color = colors[cell.adjacentBombs];
-        }
+      if (cell.hasBomb) {
+          cellContent = "💣";
+      } else if (cell.adjacentBombs > 0) {
+          cellContent = cell.adjacentBombs;
+          cellStyle.color = colors[cell.adjacentBombs];
+      }
     } else if (!alive) {
-        if (cell.flagged && !cell.hasBomb) {
-            cellContent = "❌"; 
-        } else if (cell.hasBomb) {
-            cellContent = "💣";
-        }
+      if (cell.flagged && !cell.hasBomb) {
+          cellContent = "❌"; 
+      } else if (cell.hasBomb) {
+          cellContent = "💣";
+      }
     } else if (cell.flagged) {
-        cellContent = "🚩";
+      cellContent = "🚩";
     }
-
     let cellClass = `cell ${cell.clicked || !alive ? 'clicked' : ''} ${!alive && cell.hasBomb ? 'bomb' : ''}`;
-
     return (
-        <td key={`cell-${row}-${col}`} 
-            onClick={() => handleCellClick(row, col)} 
-            onContextMenu={(event) => handleRightClick(event, row, col)}
-            className={cellClass}
-            style={cellStyle}>
-          {cellContent}
-        </td>
+      <td key={`cell-${row}-${col}`} 
+          onClick={() => handleCellClick(row, col)} 
+          onContextMenu={(event) => handleRightClick(event, row, col)}
+          className={cellClass}
+          style={cellStyle}>
+        {cellContent}
+      </td>
     );
-};
+  };
 
   return (
     <div className='MineSweeper'>
       <div className="MineSweeper-setting">
         <div className="game-info">
           <span>Clicks: {clicks}</span>
-          <span>Bombs Remaining: {num_of_bombs - flags + 1}</span>
+          <span>Bombs Remaining: {num_of_bombs - flags}</span>
           <span>Seconds: {seconds}</span>
         </div>
         <button onClick={restartGame} className="restart-button">Restart Game</button> {}
@@ -225,9 +242,10 @@ const MineSweeper = () => {
           </tbody>
         </table>
       </div>
+      {showAuthModal && <AuthModal onClose={() => setShowAuthModal(false)} />}
+      {showLogoutModal && <LogoutModal onClose={() => setShowLogoutModal(false)} />}
     </div>
   );
-  
 };
 
 export default MineSweeper;
