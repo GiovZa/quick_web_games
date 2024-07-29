@@ -10,7 +10,7 @@ import { getFirestore } from 'firebase/firestore';
 
 // Web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyCW1q3sn2nJRazqWGYarJF8nKMlpqqui6Y",
+  apiKey: "SECRETCODE",
   authDomain: "qwgdatabases.firebaseapp.com",
   databaseURL: "https://qwgdatabases-default-rtdb.firebaseio.com",
   projectId: "qwgdatabases",

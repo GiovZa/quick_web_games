@@ -1,5 +1,7 @@
 # Quick Web Games 
 
+## gzava3 is GiovZa's school account
+
 Contributors: 
 - Brian Ngeunjuntr (bngeu2): Frontend Design, Home Page, Search Page with filtering functionality, Hangman
 - Gio Zavalza (gzava3): Backend Design, Firebase integration, Login Authorization, Minesweeper
